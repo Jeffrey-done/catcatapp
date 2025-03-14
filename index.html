@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>喵喵导航 - 您的网站导航助手</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="container">
+                <div class="logo">
+                    <img src="../logo.png" alt="喵喵导航">
+                    <h1>喵喵导航</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="#features">功能特色</a>
+                    <a href="#download">立即下载</a>
+                </div>
+            </div>
+        </nav>
+        <div class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>您的智能网站导航助手</h2>
+                    <p>快速访问、智能分类、个性化定制，让网络冲浪更轻松</p>
+                    <div class="cta-buttons" id="mainDownloadBtn">
+                        <!-- 下载按钮将由 JavaScript 动态插入 -->
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="images/preview.png" alt="软件预览">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">核心功能</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>快速导航</h3>
+                    <p>智能分类，一键直达您想访问的网站</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>智能搜索</h3>
+                    <p>强大的搜索功能，快速定位目标网站</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>收藏管理</h3>
+                    <p>便捷的收藏夹功能，管理您的常用网站</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>个性定制</h3>
+                    <p>支持自定义分类和标签，打造专属导航</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">立即下载</h2>
+            <div class="download-options">
+                <div class="download-card">
+                    <div class="download-icon">🪟</div>
+                    <h3>Windows 版</h3>
+                    <p>支持 Windows 10 及以上系统</p>
+                    <a href="https://unlove.lanzoum.com/iB6Vl2ql8y4b" class="btn btn-download">下载 Windows 版</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">🍎</div>
+                    <h3>Mac 版</h3>
+                    <p>支持 macOS 10.15 及以上系统</p>
+                    <a href="javascript:void(0)" class="btn btn-download disabled">敬请期待</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">📱</div>
+                    <h3>Android 版</h3>
+                    <p>支持 Android 8.0 及以上系统</p>
+                    <a href="javascript:void(0)" class="btn btn-download disabled">敬请期待</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">🍏</div>
+                    <h3>iOS 版</h3>
+                    <p>支持 iOS 13.0 及以上系统</p>
+                    <a href="javascript:void(0)" class="btn btn-download disabled">敬请期待</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 喵喵导航 版权所有</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadUrls = {
+                windows: 'https://unlove.lanzoum.com/iB6Vl2ql8y4b',
+                mac: '#',
+                android: '#',
+                ios: '#'
+            };
+
+            const buttonTexts = {
+                windows: 'Windows版下载',
+                mac: '敬请期待',
+                android: '敬请期待',
+                ios: '敬请期待'
+            };
+
+            function detectDevice() {
+                const userAgent = navigator.userAgent.toLowerCase();
+                const platform = navigator.platform.toLowerCase();
+                
+                if (userAgent.includes('android')) {
+                    return {
+                        main: 'android',
+                        secondary: 'windows'
+                    };
+                } else if (userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod')) {
+                    return {
+                        main: 'ios',
+                        secondary: 'windows'
+                    };
+                } else if (platform.includes('mac')) {
+                    return {
+                        main: 'mac',
+                        secondary: 'windows'
+                    };
+                } else {
+                    return {
+                        main: 'windows',
+                        secondary: 'android'
+                    };
+                }
+            }
+
+            function generateDownloadButtons() {
+                const device = detectDevice();
+                const mainDownloadBtn = document.getElementById('mainDownloadBtn');
+                
+                // 生成主下载按钮
+                const mainButton = document.createElement('a');
+                mainButton.href = downloadUrls[device.main];
+                mainButton.className = 'btn btn-primary';
+                mainButton.textContent = buttonTexts[device.main];
+
+                // 生成次要下载按钮
+                const secondaryButton = document.createElement('a');
+                secondaryButton.href = downloadUrls[device.secondary];
+                secondaryButton.className = 'btn btn-secondary';
+                secondaryButton.textContent = buttonTexts[device.secondary];
+
+                // 如果是"敬请期待"的按钮，禁用链接功能
+                if (buttonTexts[device.main] === '敬请期待') {
+                    mainButton.href = 'javascript:void(0)';
+                    mainButton.style.opacity = '0.7';
+                    mainButton.style.cursor = 'default';
+                }
+                if (buttonTexts[device.secondary] === '敬请期待') {
+                    secondaryButton.href = 'javascript:void(0)';
+                    secondaryButton.style.opacity = '0.7';
+                    secondaryButton.style.cursor = 'default';
+                }
+
+                mainDownloadBtn.appendChild(mainButton);
+                mainDownloadBtn.appendChild(secondaryButton);
+            }
+
+            generateDownloadButtons();
+        });
+    </script>
+</body>
+</html> 
